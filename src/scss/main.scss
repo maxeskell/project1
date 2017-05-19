@@ -1,3 +1,92 @@
 body {
-  background: red;
+  background-color: black;
+  margin: 0;
+  font-family: 'Baloo', cursive;
+}
+header {
+  height: 50px;
+  width: 100%;
+  background-color: red;
+  text-align: center;
+}
+
+h2, h3, nav {
+  text-align: center;
+  font-size: 10px;
+}
+
+nav {
+  height: 50px;
+  width: 100%;
+  background-color: blue;
+  text-align: centre;
+  float: left
+}
+main {
+  width: 100%;
+  height: 600px;
+  margin: 10px auto;
+}
+section {
+  width: 500px;
+  height: 550px;
+  margin: 10px;
+  background-color: green;
+  float: left;
+  .left {
+    float: left;
+  }
+  .right {
+    float: right;
+  }
+}
+div {
+  .square {
+    height: 100px;
+    width: 100px;
+    float: left;
+    border: black solid 1px;
+    background-size: cover;
+    background-position: center;
+        &.otter {
+          background-image: url("../assets/images/otternormal.jpeg");
+          size: cover;
+          position: center;
+          display: block;
+        }
+        &.beaver {
+          background-image: url("../assets/images/beaver.jpeg");
+          size: cover;
+          position: center;
+          display: block;
+    }
+  }
+  .badge {
+    height: 100px;
+    width: 100px;
+    float: left;
+    border: black solid 1px;
+    background-image: url("../assets/images/mound_1.png");
+    background-size: cover;
+    background-position: center;
+    img {}
+  }
+}
+.gameholder, .badgearea{
+  width: 350px;
+  height: 350px;
+  margin: 0 auto;
+}
+.title {
+  width: 100%;
+  height: 50px;
+  background-color: grey;
+  /*insert logo or title*/
+}
+
+footer {
+  height: 50px;
+  width: 100%;
+  background-color: pink;
+  clear: both;
 }
