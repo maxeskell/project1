@@ -47,8 +47,8 @@ $(() => {
   let highscoreAverageClickTime = 0;
 
   // reset function
-  //update highscore and highscore screen
   const reset = function() {
+    //update highscore and highscore screen
     if (userScore > highscore) {
       highscore = userScore;
       $highscoreScreen.html(highscore);
@@ -60,15 +60,16 @@ $(() => {
     clearInterval(timerId);
     timeRemaining = 20;
     //insert clear board
+    $squares.removeClass('otter beaver');
   };
 
   //start game when 'start button' is pushed, only if game not started
   $button.on('click', function() {
     if (gameOn === false || timeRemaining === 0) {
+      //reset game
+      reset();
       //store that game has been started
       gameOn = true;
-      //reset gameOn
-      reset();
       //run function to show beavers and otters for time interval
       showAnimals();
       //start timer
@@ -101,7 +102,9 @@ $(() => {
     setTimeout(() => {
       selectRandomSquare().addTemporaryClass(randomAnimal(), 1000);
       delay = Math.random() * 1000 * (3 - 1) + 1;
-      showAnimals();
+      if (gameOn === true) {
+        showAnimals();
+      }
     }, delay);
   };
 

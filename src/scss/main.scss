@@ -90,14 +90,14 @@ button {
   clear: both;
 }
 
-.player {
+.player, {
   float: left;
-  clear: both;
+  width: 240px;
 }
 
 .topscore {
   float: right;
-  clear: both;
+  width: 240px;
 }
 
 .badgearea {
@@ -110,6 +110,9 @@ button {
 p {
   float: left;
   color: #DB9E36;
+  width: 120px;
+  line-height: 1.0;
+  margin: 5px 5px 5px 10px;
 }
 
 div {
@@ -156,7 +159,7 @@ div {
 }
 
 .screen {
-  width: 80px;
+  width: 60px;
   height: 30px;
   line-height: 30px;
   background-color: #444;
@@ -167,7 +170,7 @@ div {
   color: #FFD34E;
   font-size: 25px;
   float: left;
-  margin: 5px;
+  margin: 5px 15px 5px 5px;
 }
 
 footer {
