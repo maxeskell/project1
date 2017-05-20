@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Project 1</title>
+  <audio id="audio"></audio>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="public/js/app.js" charset="utf-8"></script>
   <link rel="stylesheet" href="public/css/main.css">
@@ -13,15 +14,20 @@
 <body>
   <!-- header -->
   <header>
-    <h1>Wack a Beaver</h1></header>
+    <h1>wack a beaver</h1></header>
 
   <main>
+
     <section class="left">
-      <div class="gameTitle">
+      <div class="title">
         <h2>watch out beavers are about</h2>
       </div>
-      <div class="button">
-        <button type="button" name="start">start</button>
+      <div class="info">
+        <p>time remaining</p>
+        <div id="timerScreen" class="screen">20</div>
+        <div class="button">
+          <button type="button" name="start"><span>start</span></button>
+        </div>
       </div>
       <div class="gameholder">
         <div id="square1" class="square"></div>
@@ -33,33 +39,47 @@
         <div id="square7" class="square"></div>
         <div id="square8" class="square"></div>
         <div id="square9" class="square"></div>
+        <div id="square10" class="square"></div>
+        <div id="square11" class="square"></div>
+        <div id="square12" class="square"></div>
+        <div id="square13" class="square"></div>
+        <div id="square14" class="square"></div>
+        <div id="square15" class="square"></div>
+        <div id="square16" class="square"></div>
+      </div>
+      <div class="title">
+        <h2>Scoreboard</h2>
       </div>
       <div class="scoreboard">
-        <h3>scorboard</h3>
-        <p>Click score</p>
+        <p>click score</p>
         <div id="clickScoreScreen" class="screen">0</div>
-        <p>Current score</p>
+        <p>current score</p>
         <div id="userScoreScreen" class="screen">0</div>
       </div>
     </section>
 
-
-    <!-- put score, coundowntimer, and badges here -->
     <section class="right">
-      <h2>Your stats</h2>
-      <div id="timerScreen" class="screen">20</div>
+      <div class="title">
+        <h2>your stats</h2>
+      </div>
       <div class="metrics">
-        <h3>metrics</h3>
-        <p>Your fastest click speed</p>
+        <div class="player">
+        <p>your fastest click speed</p>
         <div id="fastestClickScreen" class="screen">0</div>
-        <p>Your average click speed</p>
+        <p>your average click speed</p>
         <div id="averageCLickScreen" class="screen">0</div>
-        <p>Highest score</p>
+      </div>
+      <div class="topscore">
+        <p>highest score</p>
         <div id="highscoreScreen" class="screen">0</div>
-        <p>Lowest average click speed </p>
+        <p>lowest average click speed </p>
         <div id="highscoreAverageCLickScreen" class="screen">0</div>
-        <p>Fastest ever click</p>
+        <p>fastest ever click</p>
         <div id="highscoreFastestClickScreen" class="screen">0</div>
+      </div>
+      </div>
+      <div class="title">
+        <h2>badges</h2>
       </div>
       <div class="badgearea">
         <div id="badge1" class="badge">a</div>
