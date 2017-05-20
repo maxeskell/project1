@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <title>Project 1</title>
-  <script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="public/js/app.js" charset="utf-8"></script>
   <link rel="stylesheet" href="public/css/main.css">
   <link href="https://fonts.googleapis.com/css?family=Baloo" rel="stylesheet">
@@ -14,24 +12,17 @@
 
 <body>
   <!-- header -->
-  <header><h1>Wack a Beaver</h1></header>
-
-  <!-- navigation buttons -->
-  <nav>
-    <a href="#">Project 1</a>
-    <a href="#">Project 2</a>
-    <a href="#">Project 3</a>
-    <a href="#">Project 4</a>
-  </nav>
+  <header>
+    <h1>Wack a Beaver</h1></header>
 
   <main>
     <section class="left">
       <div class="gameTitle">
-      <h2>watch out beavers are about</h2>
-    </div>
-    <div class="button">
-      <button type="button" name="start">start</button>
-    </div>
+        <h2>watch out beavers are about</h2>
+      </div>
+      <div class="button">
+        <button type="button" name="start">start</button>
+      </div>
       <div class="gameholder">
         <div id="square1" class="square"></div>
         <div id="square2" class="square"></div>
@@ -43,25 +34,32 @@
         <div id="square8" class="square"></div>
         <div id="square9" class="square"></div>
       </div>
+      <div class="scoreboard">
+        <h3>scorboard</h3>
+        <p>Click score</p>
+        <div id="clickScoreScreen" class="screen">0</div>
+        <p>Current score</p>
+        <div id="userScoreScreen" class="screen">0</div>
+      </div>
     </section>
 
 
     <!-- put score, coundowntimer, and badges here -->
     <section class="right">
       <h2>Your stats</h2>
-      <div class="timerScreen">
-      </div>
-      <div class="scoreboard">
-        <h3>scorboard</h3>
-        <div class="scoreScreen"></div>
-        <div class="highscoreScreen"></div>
-      </div>
+      <div id="timerScreen" class="screen">20</div>
       <div class="metrics">
         <h3>metrics</h3>
-        <div class="fastestArea"></div>
-        <div class="averageArea"></div>
-        <div class="bestFastestArea"></div>
-        <div class="bestAverageArea"></div>
+        <p>Your fastest click speed</p>
+        <div id="fastestClickScreen" class="screen">0</div>
+        <p>Your average click speed</p>
+        <div id="averageCLickScreen" class="screen">0</div>
+        <p>Highest score</p>
+        <div id="highscoreScreen" class="screen">0</div>
+        <p>Lowest average click speed </p>
+        <div id="highscoreAverageCLickScreen" class="screen">0</div>
+        <p>Fastest ever click</p>
+        <div id="highscoreFastestClickScreen" class="screen">0</div>
       </div>
       <div class="badgearea">
         <div id="badge1" class="badge">a</div>
@@ -72,22 +70,21 @@
         <div id="badge6" class="badge">f</div>
         <div id="badge7" class="badge">g</div>
         <div id="badge8" class="badge">h</div>
-        <div id="badge9" class="badge">i</div>
       </div>
     </section>
 
   </main>
   <!-- put my info, link to github and GA logo -->
   <footer>
-<div class="personal">
-  <a href="#">Max Eskell</a>
-  <a href="#">GitHub Repo</a>
-  <a href="#">LinkedIn</a>
-</div>
-<div class="generalAssembly">
-  <a href="#">GA</a>
-  <a href="#">GA website</a>
-</div>
+    <div class="personal">
+      <a href="#">Max Eskell</a>
+      <a href="#">GitHub Repo</a>
+      <a href="#">LinkedIn</a>
+    </div>
+    <div class="generalAssembly">
+      <a href="#">GA</a>
+      <a href="#">GA website</a>
+    </div>
 
   </footer>
 
