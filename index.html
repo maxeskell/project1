@@ -25,10 +25,11 @@
       <div class="info">
         <p>time remaining</p>
         <div id="timerScreen" class="screen">20</div>
-        <div class="button">
-          <button type="button" name="start"><span>start</span></button>
+        <div class="button" id="play">
+          <button type="button" name="play"><span>play</span></button>
         </div>
       </div>
+
       <div class="gameholder">
         <div id="square1" class="square"></div>
         <div id="square2" class="square"></div>
@@ -47,6 +48,7 @@
         <div id="square15" class="square"></div>
         <div id="square16" class="square"></div>
       </div>
+
       <div class="title">
         <h2>Scoreboard</h2>
       </div>
@@ -55,41 +57,51 @@
         <div id="clickScoreScreen" class="screen">0</div>
         <p>current score</p>
         <div id="userScoreScreen" class="screen">0</div>
+        <p>click time</p>
+        <div id="timeDifferenceScreen" class="screen">0</div>
       </div>
     </section>
 
     <section class="right">
+
       <div class="title">
-        <h2>your stats</h2>
+        <h2>Game information</h2>
       </div>
-      <div class="metrics">
+
+      <div class="scoreinfo">
+
         <div class="player">
-        <p>your fastest click speed</p>
-        <div id="fastestClickScreen" class="screen">0</div>
-        <p>your average click speed</p>
-        <div id="averageCLickScreen" class="screen">0</div>
+          <h3> player information </h3>
+          <p>your fastest click speed</p>
+          <div id="fastestClickScreen" class="screen">0</div>
+          <p>your average click speed</p>
+          <div id="averageCLickScreen" class="screen">0</div>
+        </div>
+
+        <div class="topscore">
+          <h3> top player information </h3>
+          <p>highest score</p>
+          <div id="highscoreScreen" class="screen">0</div>
+          <p>fastest average click speed </p>
+          <div id="highscoreAverageCLickScreen" class="screen">0</div>
+          <p>fastest ever click</p>
+          <div id="highscoreFastestClickScreen" class="screen">0</div>
+        </div>
+
       </div>
-      <div class="topscore">
-        <p>highest score</p>
-        <div id="highscoreScreen" class="screen">0</div>
-        <p>lowest average click speed </p>
-        <div id="highscoreAverageCLickScreen" class="screen">0</div>
-        <p>fastest ever click</p>
-        <div id="highscoreFastestClickScreen" class="screen">0</div>
-      </div>
-      </div>
+
       <div class="title">
         <h2>badges</h2>
       </div>
       <div class="badgearea">
-        <div id="badge1" class="badge">a</div>
-        <div id="badge2" class="badge">b</div>
-        <div id="badge3" class="badge">c</div>
-        <div id="badge4" class="badge">d</div>
-        <div id="badge5" class="badge">e</div>
-        <div id="badge6" class="badge">f</div>
-        <div id="badge7" class="badge">g</div>
-        <div id="badge8" class="badge">h</div>
+        <div id="badge1" class="badge badge1">a</div>
+        <div id="badge2" class="badge badge2">b</div>
+        <div id="badge3" class="badge badge3">c</div>
+        <div id="badge4" class="badge badge4">d</div>
+        <div id="badge5" class="badge badge5">e</div>
+        <div id="badge6" class="badge badge6">f</div>
+        <div id="badge7" class="badge badge7">g</div>
+        <div id="badge8" class="badge badge8">h</div>
       </div>
     </section>
 
