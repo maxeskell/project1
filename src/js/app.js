@@ -4,7 +4,10 @@ $(() => {
   const $gameholder = $('.gameholder');
   const $squares = $('.square');
   const $play = $('#play');
+  const $ready = $('#ready');
   const $timerScreen = $('#timerScreen');
+  const $introduction = $('.introduction');
+
 
   //global vaiables for user scores
   const $clickScoreScreen = $('#clickScoreScreen');
@@ -113,6 +116,10 @@ $(() => {
     $badges.removeClass('badge1 badge2 badge3 badge4 badge5 badge6 badge7 badge8');
   };
 
+  //move from ready introduction screen to game
+  $ready.on('click', function() {
+    $introduction.addClass('hide');
+  });
 
   //start game when 'start button' is pushed, only if game not started
   $play.on('click', function() {
@@ -136,7 +143,6 @@ $(() => {
       }, 1000);
     }
   });
-
 
   //select random square
   const selectRandomSquare = function() {
