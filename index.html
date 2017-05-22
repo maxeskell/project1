@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Project 1</title>
-  <audio id="audio"></audio>
+
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="public/js/app.js" charset="utf-8"></script>
   <link rel="stylesheet" href="public/css/main.css">
@@ -12,7 +12,7 @@
 </head>
 
 <body>
-  <!-- header -->
+  <audio id="audio"></audio>
   <header>
     <h1>wack a beaver</h1></header>
 
@@ -50,14 +50,14 @@
       </div>
 
       <div class="title">
-        <h2>Scoreboard</h2>
+        <h2>scoreboard</h2>
       </div>
       <div class="scoreboard">
         <p>click score</p>
         <div id="clickScoreScreen" class="screen">0</div>
         <p>current score</p>
         <div id="userScoreScreen" class="screen">0</div>
-        <p>click time</p>
+        <p>click time (ms)</p>
         <div id="timeDifferenceScreen" class="screen">0</div>
       </div>
     </section>
@@ -65,27 +65,27 @@
     <section class="right">
 
       <div class="title">
-        <h2>Game information</h2>
+        <h2>game information</h2>
       </div>
 
       <div class="scoreinfo">
 
         <div class="player">
           <h3> player information </h3>
-          <p>your fastest click speed</p>
+          <p>your fastest click speed (ms)</p>
           <div id="fastestClickScreen" class="screen">0</div>
-          <p>your average click speed</p>
+          <p>your average click speed (ms)</p>
           <div id="averageCLickScreen" class="screen">0</div>
         </div>
 
         <div class="topscore">
           <h3> top player information </h3>
-          <p>highest score</p>
-          <div id="highscoreScreen" class="screen">0</div>
-          <p>fastest average click speed </p>
-          <div id="highscoreAverageCLickScreen" class="screen">0</div>
           <p>fastest ever click</p>
           <div id="highscoreFastestClickScreen" class="screen">0</div>
+          <p>fastest average click speed </p>
+          <div id="highscoreAverageCLickScreen" class="screen">0</div>
+          <p>highest score</p>
+          <div id="highscoreScreen" class="screen">0</div>
         </div>
 
       </div>
@@ -94,14 +94,14 @@
         <h2>badges</h2>
       </div>
       <div class="badgearea">
-        <div id="badge1" class="badge badge1">a</div>
-        <div id="badge2" class="badge badge2">b</div>
-        <div id="badge3" class="badge badge3">c</div>
-        <div id="badge4" class="badge badge4">d</div>
-        <div id="badge5" class="badge badge5">e</div>
-        <div id="badge6" class="badge badge6">f</div>
-        <div id="badge7" class="badge badge7">g</div>
-        <div id="badge8" class="badge badge8">h</div>
+        <div id="badge1" class="badge badge1"></div>
+        <div id="badge2" class="badge badge2"></div>
+        <div id="badge3" class="badge badge3"></div>
+        <div id="badge4" class="badge badge4"></div>
+        <div id="badge5" class="badge badge5"></div>
+        <div id="badge6" class="badge badge6"></div>
+        <div id="badge7" class="badge badge7"></div>
+        <div id="badge8" class="badge badge8"></div>
       </div>
     </section>
 
@@ -109,13 +109,13 @@
   <!-- put my info, link to github and GA logo -->
   <footer>
     <div class="personal">
-      <a href="#">Max Eskell</a>
+      <a href="#">Made by Max Eskell</a>
       <a href="#">GitHub Repo</a>
-      <a href="#">LinkedIn</a>
+      <a href="https://www.linkedin.com/in/maxeskell/">LinkedIn</a>
     </div>
     <div class="generalAssembly">
       <a href="#">GA</a>
-      <a href="#">GA website</a>
+      <a href="https://generalassemb.ly/">GA website</a>
     </div>
 
   </footer>

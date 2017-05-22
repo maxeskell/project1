@@ -17,7 +17,7 @@ $(() => {
 
   //global variables for topscores
   const $highestscoreScreen = $('#highscoreScreen');
-  const $highestscoreFastestClickScreen = $('.highscoreFastestClickScreen');
+  const $highestscoreFastestClickScreen = $('#highscoreFastestClickScreen');
   const $highestscoreaverageCLickScreen = $('#highscoreAverageCLickScreen');
 
   //global variables for badges
@@ -39,7 +39,7 @@ $(() => {
   // game logic constants
   let gameOn = false;
 
-  //game score onstants
+  //game score constants
   let userScore = 0;
   let clickScore = 0;
   let otterScore = 0;
@@ -66,32 +66,33 @@ $(() => {
   };
   //function to find the players fastes click time
   const findUserFastestCLick = function() {
-    userFastestCLick = Math.min(userTimeArray);
+    userFastestCLick = Math.min.apply(Math, userTimeArray);
     return userFastestCLick;
   };
   //function to find the players average click time
   const findUserAverageClickTime = function() {
-    userAverageClickTime = userTimeArray.reduce(function(a, b) {
-      ((a + b) / (userTimeArray.length));
+    const sum = userTimeArray.reduce(function(a, b) {
+      return a + b;
     }, 0);
+    userAverageClickTime = parseInt(sum/(userTimeArray.length));
     return userAverageClickTime;
   };
   // reset function
   const reset = function() {
+    //update fastest click time and fastest click time screen
+    if (userFastestCLick < highscoreFastestClickTime || highscoreFastestClickTime === 0) {
+      highscoreFastestClickTime = userFastestCLick;
+      $highestscoreFastestClickScreen.html(highscoreFastestClickTime);
+    }
+    //update fastest average click time and fastest average click time screen
+    if (userAverageClickTime < highscoreAverageClickTime || highscoreAverageClickTime === 0) {
+      highscoreAverageClickTime = userAverageClickTime;
+      $highestscoreaverageCLickScreen.html(highscoreAverageClickTime);
+    }
     //update highscore and highscore screen
     if (userScore > highscore) {
       highscore = userScore;
       $highestscoreScreen.html(highscore);
-    }
-    //update fastest click time and fastest click time screen
-    if (userFastestCLick > highscoreFastestClickTime) {
-      highscoreFastestClickTime = userFastestCLick;
-      $highestscoreFastestClickScreen.html(highscore);
-    }
-    //update fastest average click time and fastest average click time screen
-    if (userAverageClickTime > highscoreAverageClickTime) {
-      highscoreAverageClickTime = userAverageClickTime;
-      $highestscoreaverageCLickScreen.html(highscore);
     }
     //reset all scores
     userScore = 0;
@@ -100,6 +101,7 @@ $(() => {
     beaverScore = 0;
     clickScore = 0;
     //reset user fastest and average click time
+    userTimeArray = [];
     userFastestCLick = 0;
     userAverageClickTime = 0;
     //reset timer and update timer screen
@@ -107,7 +109,7 @@ $(() => {
     timeRemaining = 20;
     //clear game board
     $squares.removeClass('otter beaver');
-    //clear badges (check how this works)
+    //clear badges from badge area
     $badges.removeClass('badge1 badge2 badge3 badge4 badge5 badge6 badge7 badge8');
   };
 
@@ -127,6 +129,7 @@ $(() => {
         $timerScreen.html(timeRemaining);
         // when timer reaches zero stop game
         if (timeRemaining === 0) {
+          $timerScreen.addTemporaryClass('ringing', 2000);
           clearInterval(timerId);
           gameOn = false;
         }
@@ -150,17 +153,16 @@ $(() => {
   const showAnimals = function() {
     setTimeout(() => {
       selectRandomSquare().addTemporaryClass(randomAnimal(), 1000);
-      delay = Math.random() * 1000 * (3 - 1) + 1;
+      delay = Math.random() * 1000 * (2.5 - 1) + 1;
       //only show animals if game has been started and countdown timer has not run out
       if (gameOn === true) {
         timeShowAnimal = $.now();
-        console.log(timeShowAnimal);
         showAnimals();
       }
     }, delay);
   };
 
-  // check and show badges
+  // check and show badges if player's scores are high enough
   const checkAndShowBadges = function() {
     if (beaverScore > 5) {
       $badge1.addClass('badge1');
@@ -191,7 +193,6 @@ $(() => {
   //game logic for user clicking on beavers/otters/empty square
   $gameholder.on('click', function(e) {
     userClickAnimal = $.now();
-    console.log(userClickAnimal);
     if (gameOn === true) {
       if ($(e.target).hasClass('beaver')) {
         //update scores
@@ -209,18 +210,18 @@ $(() => {
         otterScore += 1;
         checkAndShowBadges();
         ($(e.target).removeClass('otter'));
-        //make sound
+        //make sound (not included yet)
       } else {
         clickScore = -5;
         userScore -= 5;
         blankScore += 1;
-        //make sound
+        //make sound (not included yet)
       }
       //show users current score, running total and click time
       $clickScoreScreen.text(clickScore);
       $userScoreScreen.text(userScore);
       //store users time difference in array
-      userTimeArray.push(clickTime);
+      userTimeArray.push(findClickTime());
       //show click time to users
       $clickTimeDifferenceScreen.text(findClickTime());
       //find and show users fastest click time
