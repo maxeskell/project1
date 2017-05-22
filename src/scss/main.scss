@@ -49,41 +49,39 @@ main {
 .introduction {
   z-index: 2;
   position: absolute;
-  left: 0px;
-  top: 0px;
+  left: 0;
+  top: 0;
   width: 100%;
   height: 100%;
   background-color: #105B63;
+  text-align: center;
+
   .introText {
     margin: 100px auto;
     height: 500px;
     width: 700px;
-  p {
-    width: 100%;
-    font-size: 40px;
-    text-align: center;
-    margin: 10px;
+
+    p {
+      width: 100%;
+      font-size: 40px;
+      text-align: center;
+      margin: 10px;
+    }
   }
-  #ready {
-    margin: 0 auto;
-  }
-}
 }
 
 .hide {
   display: none!important;
 }
-
 @media only screen and (max-width: 1050px) {
-    main {
-        width: 510px;
-    }
+  main {
+    width: 510px;
+  }
 }
-
 @media only screen and (max-width: 320px) {
-    main {
-        //make responsive for mobiles
-    }
+  main {
+    //make responsive for mobiles
+  }
 }
 
 .title {
@@ -101,6 +99,7 @@ section {
   float: left;
 }
 //start button
+
 button {
   margin: 5px 10px 5px 20px;
   height: 30px;
@@ -115,10 +114,10 @@ button {
 .info {
   height: 50px;
   clear: both;
+
   #timerScreen.ringing {
     animation: shake 0.5s infinite;
   }
-
 }
 
 .gameholder {
@@ -219,7 +218,7 @@ div {
     }
 
     &.badge3 {
-      background-image: url("../assets/images/beaver20points.png");
+      background-image: url("../assets/images/beaver15points.png");
       background-size: cover;
       position: center;
       display: block;
@@ -233,28 +232,28 @@ div {
     }
 
     &.badge5 {
-      background-image: url("../assets/images/otter.jpeg");
+      background-image: url("../assets/images/topscore.png");
       background-size: cover;
       position: center;
       display: block;
     }
 
     &.badge6 {
-      background-image: url("../assets/images/otter.jpeg");
+      background-image: url("../assets/images/missthemark.jpg");
       background-size: cover;
       position: center;
       display: block;
     }
 
     &.badge7 {
-      background-image: url("../assets/images/bang.jpeg");
+      background-image: url("../assets/images/otter5.png");
       background-size: cover;
       position: center;
       display: block;
     }
 
     &.badge8 {
-      background-image: url("../assets/images/Abadge.png");
+      background-image: url("../assets/images/otter10.png");
       background-size: cover;
       position: center;
       display: block;
@@ -301,22 +300,25 @@ footer {
     margin: 10px;
   }
 }
-
-
 @keyframes shake {
-  10%, 90% {
+  10%,
+  90% {
     transform: translateX(-1px);
   }
 
-  20%, 80% {
+  20%,
+  80% {
     transform: translateX(2px);
   }
 
-  30%, 50%, 70% {
+  30%,
+  50%,
+  70% {
     transform: translateX(-4px);
   }
 
-  40%, 60% {
+  40%,
+  60% {
     transform: translateX(4px);
   }
 }

@@ -77,7 +77,7 @@ $(() => {
     const sum = userTimeArray.reduce(function(a, b) {
       return a + b;
     }, 0);
-    userAverageClickTime = parseInt(sum/(userTimeArray.length));
+    userAverageClickTime = parseInt(sum / (userTimeArray.length));
     return userAverageClickTime;
   };
   // reset function
