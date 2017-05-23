@@ -227,45 +227,38 @@ div {
     background-size: cover;
     background-position: center;
     background-color: rgba(192,192,192,0.5);
+    @include pop-up-images();
     //badges
     &.badge1 {
       background-image: url("../assets/images/beaver5points.png");
-      @include pop-up-images();
     }
 
     &.badge2 {
       background-image: url("../assets/images/beaver10points.png");
-      @include pop-up-images();
     }
 
     &.badge3 {
       background-image: url("../assets/images/beaver15points.png");
-      @include pop-up-images();
     }
 
     &.badge4 {
       background-image: url("../assets/images/beaver20points.png");
-      @include pop-up-images();
     }
 
     &.badge5 {
       background-image: url("../assets/images/topscore.png");
-      @include pop-up-images();
     }
 
     &.badge6 {
       background-image: url("../assets/images/missthemark.jpg");
-      @include pop-up-images();
     }
 
     &.badge7 {
       background-image: url("../assets/images/otter5.png");
-      @include pop-up-images();
     }
 
     &.badge8 {
       background-image: url("../assets/images/otter10.png");
-      @include pop-up-images();
     }
   }
 }

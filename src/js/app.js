@@ -1,4 +1,20 @@
 $(() => {
+
+  //create 'addTemporaryClass' function
+  (function($) {
+    $.fn.extend({
+      addTemporaryClass: function(className, duration) {
+        var elements = this;
+        setTimeout(function() {
+          elements.removeClass(className);
+        }, duration);
+        return this.each(function() {
+          $(this).addClass(className);
+        });
+      }
+    });
+  })(jQuery);
+
   console.log('Ready.');
   //define global variables
   const $gameholder = $('.gameholder');
@@ -58,15 +74,14 @@ $(() => {
   //click time constants
   let timeShowAnimal = 0;
   let userClickAnimal = 0;
-  let clickTime = 0;
+  // let clickTime = 0;
   let userTimeArray = [];
   let userFastestCLick = 0;
   let userAverageClickTime = 0;
 
   //function to find click time
   const findClickTime = function() {
-    clickTime = ((userClickAnimal - timeShowAnimal));
-    return clickTime;
+    return ((userClickAnimal - timeShowAnimal));
   };
   //function to find the players fastes click time
   const findUserFastestCLick = function() {
@@ -123,10 +138,8 @@ $(() => {
   });
 
   //pulse button
-  $.when( $.ready).then(function() {
-    $playButton.click(function() {
-      $playButton.removeClass('pulse');
-    });
+  $playButton.click(function() {
+    $(this).removeClass('pulse');
   });
 
   //start game when 'start button' is pushed, only if game not started
@@ -207,7 +220,7 @@ $(() => {
   //game logic for user clicking on beavers/otters/empty square
   $gameholder.on('click', function(e) {
     userClickAnimal = $.now();
-    if (gameOn === true) {
+    if (gameOn) {
       if ($(e.target).hasClass('beaver')) {
         //update scores
         clickScore = 20;
@@ -244,19 +257,4 @@ $(() => {
       $averageCLickScreen.text(findUserAverageClickTime());
     }
   });
-
-  //create 'addTemporaryClass' function
-  (function($) {
-    $.fn.extend({
-      addTemporaryClass: function(className, duration) {
-        var elements = this;
-        setTimeout(function() {
-          elements.removeClass(className);
-        }, duration);
-        return this.each(function() {
-          $(this).addClass(className);
-        });
-      }
-    });
-  })(jQuery);
 });
