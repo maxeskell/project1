@@ -117,16 +117,16 @@ $(() => {
     $badges.removeClass('badge1 badge2 badge3 badge4 badge5 badge6 badge7 badge8');
   };
 
+  //move from ready introduction screen to game 'ready' button is clicked
+  $ready.on('click', function() {
+    $introduction.addClass('hide');
+  });
+
   //pulse button
   $.when( $.ready).then(function() {
     $playButton.click(function() {
       $playButton.removeClass('pulse');
     });
-  });
-
-  //move from ready introduction screen to game
-  $ready.on('click', function() {
-    $introduction.addClass('hide');
   });
 
   //start game when 'start button' is pushed, only if game not started

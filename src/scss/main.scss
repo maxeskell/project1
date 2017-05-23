@@ -1,22 +1,34 @@
+//global color can be changed here
+$font-stack: 'Baloo', cursive;
+$main-color: #FFFAD5;
+$font-color: #FFD34E;
+$header-footer-color: #105B63;
+//mixin created to make sure all images called fit into thier div
+@mixin pop-up-images() {
+  background-size: cover;
+  position: center;
+  display: block;
+}
+
 body {
-  background-color: #FFFAD5;
-  color: #FFD34E;
+  background-color: $main-color;
+  color: $font-color;
   margin: 0;
-  font-family: 'Baloo', cursive;
+  font-family: $font-stack;
 }
 
 header {
   height: 75px;
   width: 100%;
-  background-color: #105B63;
-  color: #FFD34E;
+  background-color: $header-footer-color;
+  color: $font-color;
   text-align: center;
 }
 
 h1 {
   font-size: 50px;
   text-align: center;
-  color: #FFD34E;
+  color: $font-color;
   margin: 0 auto;
 }
 
@@ -24,14 +36,14 @@ h2 {
   margin: 0 auto;
   text-align: center;
   font-size: 30px;
-  color: #FFD34E;
+  color: $font-color;
 }
 
 h3 {
   margin: 0 auto;
   text-align: center;
   font-size: 20px;
-  color: #FFD34E;
+  color: $font-color;
 }
 
 main {
@@ -45,7 +57,7 @@ main {
   bottom: 0;
   left: 0;
 }
-
+//introduction (landing) page
 .introduction {
   z-index: 2;
   position: absolute;
@@ -69,18 +81,14 @@ main {
     }
   }
 }
-
+//global asignment so that anything with the class hide is forced to be hidden
 .hide {
   display: none!important;
 }
+//make reactive for acreens less than 1050px
 @media only screen and (max-width: 1050px) {
   main {
     width: 510px;
-  }
-}
-@media only screen and (max-width: 320px) {
-  main {
-    //make responsive for mobiles
   }
 }
 
@@ -89,7 +97,7 @@ main {
   height: 50px;
   clear: both;
 }
-
+//container for main playing area and gameinformation
 section {
   width: 500px;
   height: 590px;
@@ -98,8 +106,8 @@ section {
   color: #DB9E36;
   float: left;
 }
-//start button
 
+//start button
 button {
   margin: 5px 10px 5px 20px;
   height: 30px;
@@ -110,7 +118,7 @@ button {
   background-color: #FFFAD5;
   border-radius: 6px;
 }
-
+//pulse effect for the play button, so that it draws the eye after the user moves from the intro screen
 .pulse {
   -webkit-animation-name: pulsate;
   -webkit-animation-duration: 1s;
@@ -135,7 +143,7 @@ button {
 .info {
   height: 50px;
   clear: both;
-
+//effect to make timmer shudder when it counts down to zero
   #timerScreen.ringing {
     animation: shake 0.5s infinite;
   }
@@ -188,8 +196,8 @@ p {
   line-height: 1.0;
   margin: 5px 5px 5px 10px;
 }
-// game area squares
 
+// game area squares
 div {
   .square {
     height: 75px;
@@ -202,16 +210,12 @@ div {
     //reveal otter
     &.otter {
       background-image: url("../assets/images/otternormal.jpeg");
-      size: cover;
-      position: center;
-      display: block;
+      @include pop-up-images();
     }
     //reveal beaver
     &.beaver {
       background-image: url("../assets/images/beaver.jpeg");
-      size: cover;
-      position: center;
-      display: block;
+      @include pop-up-images();
     }
   }
   // bage background
@@ -226,58 +230,42 @@ div {
     //badges
     &.badge1 {
       background-image: url("../assets/images/beaver5points.png");
-      background-size: cover;
-      position: center;
-      display: block;
+      @include pop-up-images();
     }
 
     &.badge2 {
       background-image: url("../assets/images/beaver10points.png");
-      background-size: cover;
-      position: center;
-      display: block;
+      @include pop-up-images();
     }
 
     &.badge3 {
       background-image: url("../assets/images/beaver15points.png");
-      background-size: cover;
-      position: center;
-      display: block;
+      @include pop-up-images();
     }
 
     &.badge4 {
       background-image: url("../assets/images/beaver20points.png");
-      background-size: cover;
-      position: center;
-      display: block;
+      @include pop-up-images();
     }
 
     &.badge5 {
       background-image: url("../assets/images/topscore.png");
-      background-size: cover;
-      position: center;
-      display: block;
+      @include pop-up-images();
     }
 
     &.badge6 {
       background-image: url("../assets/images/missthemark.jpg");
-      background-size: cover;
-      position: center;
-      display: block;
+      @include pop-up-images();
     }
 
     &.badge7 {
       background-image: url("../assets/images/otter5.png");
-      background-size: cover;
-      position: center;
-      display: block;
+      @include pop-up-images();
     }
 
     &.badge8 {
       background-image: url("../assets/images/otter10.png");
-      background-size: cover;
-      position: center;
-      display: block;
+      @include pop-up-images();
     }
   }
 }
@@ -292,7 +280,7 @@ div {
   text-align: right;
   font-family: 'PT Mono', monospace;
   font-weight: bold;
-  color: #FFD34E;
+  color: $font-color;
   font-size: 25px;
   float: left;
   margin: 5px 15px 5px 5px;
@@ -301,7 +289,7 @@ div {
 footer {
   height: 75px;
   width: 100%;
-  background-color: #105B63;
+  background-color: $header-footer-color;
   clear: both;
   position: absolute;
   bottom: 0;
@@ -317,7 +305,7 @@ footer {
   }
 
   a {
-    color: #FFD34E;
+    color: $font-color;
     margin: 10px;
   }
 }
