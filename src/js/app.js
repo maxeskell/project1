@@ -1,260 +1,276 @@
-$(() => {
+//create 'addTemporaryClass' function to Jquery as an Jquery method
+(function($) {
+  $.fn.extend({
+    addTemporaryClass: function(className, duration) {
+      var elements = this;
+      setTimeout(function() {
+        elements.removeClass(className);
+      }, duration);
+      return this.each(function() {
+        $(this).addClass(className);
+      });
+    }
+  });
+})(jQuery);
 
-  //create 'addTemporaryClass' function
-  (function($) {
-    $.fn.extend({
-      addTemporaryClass: function(className, duration) {
-        var elements = this;
-        setTimeout(function() {
-          elements.removeClass(className);
-        }, duration);
-        return this.each(function() {
-          $(this).addClass(className);
-        });
+//check for other wao objects, if none define wao as global object
+var wao = wao || {};
+
+//GAME JS VARIABLES
+// timer constants
+wao.timeRemaining = 20;
+wao.timerId = null;
+wao.delay = 200;
+
+// game logic constants
+wao.gameOn = false;
+
+//game score constants
+wao.userScore = 0;
+wao.clickScore = 0;
+wao.otterScore = 0;
+wao.beaverScore = 0;
+wao.blankScore = 0;
+
+//high score constants
+wao.highscore = 0;
+wao.highscoreFastestClickTime = 0;
+wao.highscoreAverageClickTime = 0;
+
+//click time constants
+wao.timeShowAnimal = 0;
+wao.userClickAnimal = 0;
+// let clickTime = 0;
+wao.userTimeArray = [];
+wao.userFastestCLick = 0;
+wao.userAverageClickTime = 0;
+
+
+
+//function to find click time
+wao.findClickTime = function findClickTime() {
+  return ((this.userClickAnimal - this.timeShowAnimal));
+};
+//function to find the players fastes click time
+wao.findUserFastestCLick = function findUserFastestCLick() {
+  this.userFastestCLick = Math.min.apply(Math, this.userTimeArray);
+  return this.userFastestCLick;
+};
+//function to find the players average click time
+wao.findUserAverageClickTime = function findUserAverageClickTime() {
+  const sum = this.userTimeArray.reduce(function(a, b) {
+    return a + b;
+  }, 0);
+  this.userAverageClickTime = parseInt(sum / (this.userTimeArray.length));
+  return this.userAverageClickTime;
+};
+// reset function
+wao.reset = function reset() {
+  //update fastest click time and fastest click time screen
+  if (this.userFastestCLick < this.highscoreFastestClickTime || this.highscoreFastestClickTime === 0) {
+    this.highscoreFastestClickTime = this.userFastestCLick;
+    this.$highestscoreFastestClickScreen.html(this.highscoreFastestClickTime);
+  }
+  //update fastest average click time and fastest average click time screen
+  if (this.userAverageClickTime < this.highscoreAverageClickTime || this.highscoreAverageClickTime === 0) {
+    this.highscoreAverageClickTime = this.userAverageClickTime;
+    this.$highestscoreaverageCLickScreen.html(this.highscoreAverageClickTime);
+  }
+  //update highscore and highscore screen
+  if (this.userScore > this.highscore) {
+    this.highscore = this.userScore;
+    this.$highestscoreScreen.html(this.highscore);
+  }
+  //reset all scores
+  this.userScore = 0;
+  this.clickScore = 0;
+  this.otterScore = 0;
+  this.beaverScore = 0;
+  this.clickScore = 0;
+  //reset user fastest and average click time
+  this.userTimeArray = [];
+  this.userFastestCLick = 0;
+  this.userAverageClickTime = 0;
+  //reset timer and update timer screen
+  clearInterval(this.timerId);
+  this.timeRemaining = 20;
+  //clear game board
+  this.$squares.removeClass('otter beaver');
+  //clear badges from badge area
+  this.$badges.removeClass('badge1 badge2 badge3 badge4 badge5 badge6 badge7 badge8');
+};
+
+//select random square
+wao.selectRandomSquare = function selectRandomSquare() {
+  const randomIndex = Math.floor(Math.random() * this.$squares.length);
+  return this.$squares.eq(randomIndex);
+};
+
+// randomise which animal to call (currenlty otter or beaver), but prefer beaver
+wao.randomAnimal = function randomAnimal() {
+  return (Math.random() * (100 - 1) + 1) < 30 ? 'otter' : 'beaver';
+};
+
+//add beaver/otter class to random square, then call function again at an random interval (between 3 and 1 second)
+wao.showAnimals = function showAnimals() {
+  setTimeout(() => {
+    this.selectRandomSquare().addTemporaryClass(this.randomAnimal(), 1000);
+    this.delay = Math.random() * 1000 * (2.5 - 1) + 1;
+    //only show animals if game has been started and countdown timer has not run out
+    if (this.gameOn === true) {
+      this.timeShowAnimal = $.now();
+      showAnimals();
+    }
+  }, this.delay);
+};
+
+// check and show badges if player's scores are high enough
+wao.checkAndShowBadges = function checkAndShowBadges() {
+  if (this.beaverScore > 4) {
+    this.$badge1.addClass('badge1');
+  }
+  if (this.beaverScore > 9) {
+    this.$badge2.addClass('badge2');
+  }
+  if (this.beaverScore > 14) {
+    this.$badge3.addClass('badge3');
+  }
+  if (this.beaverScore > 19) {
+    this.$badge4.addClass('badge4');
+  }
+  if (this.userScore > this.highscore) {
+    this.$badge5.addClass('badge5');
+  }
+  if (this.blankScore > 9) {
+    this.$badge6.addClass('badge6');
+  }
+  if (this.otterScore > 4) {
+    this.$badge7.addClass('badge7');
+  }
+  if (this.otterScore > 9) {
+    this.$badge8.addClass('badge8');
+  }
+};
+
+//GAME PLAY FUNCTIONS
+//hide the intro page function
+wao.hideIntro = function hideIntro() {
+  this.$introduction.addClass('hide');
+};
+//remove the pulse function
+wao.removePulse = function removePulse() {
+  $(this).removeClass('pulse');
+};
+//start game function
+wao.startGame = function startGame() {
+  if (this.gameOn === false) {
+    //reset game
+    this.reset();
+    //store that game has been started
+    this.gameOn = true;
+    //run function to show beavers and otters for time interval
+    this.showAnimals();
+    //start timer
+    this.timerId = setInterval(() => {
+      this.timeRemaining--;
+      this.$timerScreen.html(this.timeRemaining);
+      // when timer reaches zero stop game
+      if (this.timeRemaining === 0) {
+        this.$timerScreen.addTemporaryClass('ringing', 2000);
+        clearInterval(this.timerId);
+        this.gameOn = false;
       }
-    });
-  })(jQuery);
+    }, 1000);
+  }
+};
 
-  console.log('Ready.');
+wao.userClick = function userClick(e) {
+  this.userClickAnimal = $.now();
+  if (this.gameOn) {
+    if ($(e.target).hasClass('beaver')) {
+      //update scores
+      this.clickScore = 20;
+      this.userScore += 20;
+      this.beaverScore += 1;
+      //show badges
+      this.checkAndShowBadges();
+      //hide animal by removing class
+      ($(e.target).removeClass('beaver'));
+      //make sound (not included yet)
+    } else if ($(e.target).hasClass('otter')) {
+      this.clickScore = -10;
+      this.userScore -= 20;
+      this.otterScore += 1;
+      this.checkAndShowBadges();
+      ($(e.target).removeClass('otter'));
+      //make sound (not included yet)
+    } else {
+      this.clickScore = -5;
+      this.userScore -= 5;
+      this.blankScore += 1;
+      //make sound (not included yet)
+    }
+    //show users current score, running total and click time
+    this.$clickScoreScreen.text(this.clickScore);
+    this.$userScoreScreen.text(this.userScore);
+    //store users time difference in array
+    this.userTimeArray.push(this.findClickTime());
+    //show click time to users
+    this.$clickTimeDifferenceScreen.text(this.findClickTime());
+    //find and show users fastest click time
+    this.$fastestClickScreen.text(this.findUserFastestCLick());
+    //find and show users average click time
+    this.$averageCLickScreen.text(this.findUserAverageClickTime());
+  }
+};
+
+
+//SETUP FUNCTION
+wao.setup = function() {
   //define global variables
-  const $gameholder = $('.gameholder');
-  const $squares = $('.square');
-  const $play = $('#play');
-  const $ready = $('#ready');
-  const $timerScreen = $('#timerScreen');
-  const $introduction = $('.introduction');
-  const $playButton = $('#play');
-
+  this.$gameholder = $('.gameholder');
+  this.$squares = $('.square');
+  this.$play = $('#play');
+  this.$ready = $('#ready');
+  this.$timerScreen = $('#timerScreen');
+  this.$introduction = $('.introduction');
+  this.$playButton = $('#play');
 
   //global vaiables for user scores
-  const $clickScoreScreen = $('#clickScoreScreen');
-  const $userScoreScreen = $('#userScoreScreen');
+  this.$clickScoreScreen = $('#clickScoreScreen');
+  this.$userScoreScreen = $('#userScoreScreen');
 
   //global vairables for user click times
-  const $clickTimeDifferenceScreen = $('#timeDifferenceScreen');
-  const $fastestClickScreen = $('#fastestClickScreen');
-  const $averageCLickScreen = $('#averageCLickScreen');
+  this.$clickTimeDifferenceScreen = $('#timeDifferenceScreen');
+  this.$fastestClickScreen = $('#fastestClickScreen');
+  this.$averageCLickScreen = $('#averageCLickScreen');
 
   //global variables for topscores
-  const $highestscoreScreen = $('#highscoreScreen');
-  const $highestscoreFastestClickScreen = $('#highscoreFastestClickScreen');
-  const $highestscoreaverageCLickScreen = $('#highscoreAverageCLickScreen');
+  this.$highestscoreScreen = $('#highscoreScreen');
+  this.$highestscoreFastestClickScreen = $('#highscoreFastestClickScreen');
+  this.$highestscoreaverageCLickScreen = $('#highscoreAverageCLickScreen');
 
   //global variables for badges
-  const $badges = $('.badge');
-  const $badge1 = $('#badge1');
-  const $badge2 = $('#badge2');
-  const $badge3 = $('#badge3');
-  const $badge4 = $('#badge4');
-  const $badge5 = $('#badge5');
-  const $badge6 = $('#badge6');
-  const $badge7 = $('#badge7');
-  const $badge8 = $('#badge8');
+  this.$badges = $('.badge');
+  this.$badge1 = $('#badge1');
+  this.$badge2 = $('#badge2');
+  this.$badge3 = $('#badge3');
+  this.$badge4 = $('#badge4');
+  this.$badge5 = $('#badge5');
+  this.$badge6 = $('#badge6');
+  this.$badge7 = $('#badge7');
+  this.$badge8 = $('#badge8');
 
-  // timer constants
-  let timeRemaining = 20;
-  let timerId = null;
-  let delay = 200;
+  //setup introduction screen so that it will hide when ready button is clicked
+  this.$ready.on('click', this.hideIntro.bind(this));
 
-  // game logic constants
-  let gameOn = false;
-
-  //game score constants
-  let userScore = 0;
-  let clickScore = 0;
-  let otterScore = 0;
-  let beaverScore = 0;
-  let blankScore = 0;
-
-  //high score constants
-  let highscore = 0;
-  let highscoreFastestClickTime = 0;
-  let highscoreAverageClickTime = 0;
-
-  //click time constants
-  let timeShowAnimal = 0;
-  let userClickAnimal = 0;
-  // let clickTime = 0;
-  let userTimeArray = [];
-  let userFastestCLick = 0;
-  let userAverageClickTime = 0;
-
-  //function to find click time
-  const findClickTime = function() {
-    return ((userClickAnimal - timeShowAnimal));
-  };
-  //function to find the players fastes click time
-  const findUserFastestCLick = function() {
-    userFastestCLick = Math.min.apply(Math, userTimeArray);
-    return userFastestCLick;
-  };
-  //function to find the players average click time
-  const findUserAverageClickTime = function() {
-    const sum = userTimeArray.reduce(function(a, b) {
-      return a + b;
-    }, 0);
-    userAverageClickTime = parseInt(sum / (userTimeArray.length));
-    return userAverageClickTime;
-  };
-  // reset function
-  const reset = function() {
-    //update fastest click time and fastest click time screen
-    if (userFastestCLick < highscoreFastestClickTime || highscoreFastestClickTime === 0) {
-      highscoreFastestClickTime = userFastestCLick;
-      $highestscoreFastestClickScreen.html(highscoreFastestClickTime);
-    }
-    //update fastest average click time and fastest average click time screen
-    if (userAverageClickTime < highscoreAverageClickTime || highscoreAverageClickTime === 0) {
-      highscoreAverageClickTime = userAverageClickTime;
-      $highestscoreaverageCLickScreen.html(highscoreAverageClickTime);
-    }
-    //update highscore and highscore screen
-    if (userScore > highscore) {
-      highscore = userScore;
-      $highestscoreScreen.html(highscore);
-    }
-    //reset all scores
-    userScore = 0;
-    clickScore = 0;
-    otterScore = 0;
-    beaverScore = 0;
-    clickScore = 0;
-    //reset user fastest and average click time
-    userTimeArray = [];
-    userFastestCLick = 0;
-    userAverageClickTime = 0;
-    //reset timer and update timer screen
-    clearInterval(timerId);
-    timeRemaining = 20;
-    //clear game board
-    $squares.removeClass('otter beaver');
-    //clear badges from badge area
-    $badges.removeClass('badge1 badge2 badge3 badge4 badge5 badge6 badge7 badge8');
-  };
-
-  //move from ready introduction screen to game 'ready' button is clicked
-  $ready.on('click', function() {
-    $introduction.addClass('hide');
-  });
-
-  //pulse button
-  $playButton.click(function() {
-    $(this).removeClass('pulse');
-  });
+  //setup pulse button so that it stops pulsing when clicked
+  this.$playButton.on('click', this.removePulse.bind(this));
 
   //start game when 'start button' is pushed, only if game not started
-  $play.on('click', function() {
-    if (gameOn === false) {
-      //reset game
-      reset();
-      //store that game has been started
-      gameOn = true;
-      //run function to show beavers and otters for time interval
-      showAnimals();
-      //start timer
-      timerId = setInterval(() => {
-        timeRemaining--;
-        $timerScreen.html(timeRemaining);
-        // when timer reaches zero stop game
-        if (timeRemaining === 0) {
-          $timerScreen.addTemporaryClass('ringing', 2000);
-          clearInterval(timerId);
-          gameOn = false;
-        }
-      }, 1000);
-    }
-  });
-
-  //select random square
-  const selectRandomSquare = function() {
-    const randomIndex = Math.floor(Math.random() * $squares.length);
-    return $squares.eq(randomIndex);
-  };
-
-  // randomise which animal to call (currenlty otter or beaver), but prefer beaver
-  const randomAnimal = function() {
-    return (Math.random() * (100 - 1) + 1) < 30 ? 'otter' : 'beaver';
-  };
-
-  //add beaver/otter class to random square, then call function again at an random interval (between 3 and 1 second)
-  const showAnimals = function() {
-    setTimeout(() => {
-      selectRandomSquare().addTemporaryClass(randomAnimal(), 1000);
-      delay = Math.random() * 1000 * (2.5 - 1) + 1;
-      //only show animals if game has been started and countdown timer has not run out
-      if (gameOn === true) {
-        timeShowAnimal = $.now();
-        showAnimals();
-      }
-    }, delay);
-  };
-
-  // check and show badges if player's scores are high enough
-  const checkAndShowBadges = function() {
-    if (beaverScore > 4) {
-      $badge1.addClass('badge1');
-    }
-    if (beaverScore > 9) {
-      $badge2.addClass('badge2');
-    }
-    if (beaverScore > 14) {
-      $badge3.addClass('badge3');
-    }
-    if (beaverScore > 19) {
-      $badge4.addClass('badge4');
-    }
-    if (userScore > highscore) {
-      $badge5.addClass('badge5');
-    }
-    if (blankScore > 9) {
-      $badge6.addClass('badge6');
-    }
-    if (otterScore > 4) {
-      $badge7.addClass('badge7');
-    }
-    if (otterScore > 9) {
-      $badge8.addClass('badge8');
-    }
-  };
+  this.$play.on('click', this.startGame.bind(this));
 
   //game logic for user clicking on beavers/otters/empty square
-  $gameholder.on('click', function(e) {
-    userClickAnimal = $.now();
-    if (gameOn) {
-      if ($(e.target).hasClass('beaver')) {
-        //update scores
-        clickScore = 20;
-        userScore += 20;
-        beaverScore += 1;
-        //show badges
-        checkAndShowBadges();
-        //hide animal by removing class
-        ($(e.target).removeClass('beaver'));
-        //make sound (not included yet)
-      } else if ($(e.target).hasClass('otter')) {
-        clickScore = -10;
-        userScore -= 20;
-        otterScore += 1;
-        checkAndShowBadges();
-        ($(e.target).removeClass('otter'));
-        //make sound (not included yet)
-      } else {
-        clickScore = -5;
-        userScore -= 5;
-        blankScore += 1;
-        //make sound (not included yet)
-      }
-      //show users current score, running total and click time
-      $clickScoreScreen.text(clickScore);
-      $userScoreScreen.text(userScore);
-      //store users time difference in array
-      userTimeArray.push(findClickTime());
-      //show click time to users
-      $clickTimeDifferenceScreen.text(findClickTime());
-      //find and show users fastest click time
-      $fastestClickScreen.text(findUserFastestCLick());
-      //find and show users average click time
-      $averageCLickScreen.text(findUserAverageClickTime());
-    }
-  });
-});
+  this.$gameholder.on('click', this.userClick.bind(this));
+};
+$(wao.setup.bind(wao));
