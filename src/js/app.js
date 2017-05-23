@@ -7,6 +7,7 @@ $(() => {
   const $ready = $('#ready');
   const $timerScreen = $('#timerScreen');
   const $introduction = $('.introduction');
+  const $playButton = $('#play');
 
 
   //global vaiables for user scores
@@ -116,6 +117,13 @@ $(() => {
     $badges.removeClass('badge1 badge2 badge3 badge4 badge5 badge6 badge7 badge8');
   };
 
+  //pulse button
+  $.when( $.ready).then(function() {
+    $playButton.click(function() {
+      $playButton.removeClass('pulse');
+    });
+  });
+
   //move from ready introduction screen to game
   $ready.on('click', function() {
     $introduction.addClass('hide');
@@ -170,28 +178,28 @@ $(() => {
 
   // check and show badges if player's scores are high enough
   const checkAndShowBadges = function() {
-    if (beaverScore > 5) {
+    if (beaverScore > 4) {
       $badge1.addClass('badge1');
     }
-    if (beaverScore > 10) {
+    if (beaverScore > 9) {
       $badge2.addClass('badge2');
     }
-    if (beaverScore > 20) {
+    if (beaverScore > 14) {
       $badge3.addClass('badge3');
     }
-    if (beaverScore > 50) {
+    if (beaverScore > 19) {
       $badge4.addClass('badge4');
     }
-    if (otterScore > 5) {
+    if (userScore > highscore) {
       $badge5.addClass('badge5');
     }
-    if (otterScore > 10) {
+    if (blankScore > 9) {
       $badge6.addClass('badge6');
     }
-    if (blankScore > 10) {
+    if (otterScore > 4) {
       $badge7.addClass('badge7');
     }
-    if (userScore > highscore) {
+    if (otterScore > 9) {
       $badge8.addClass('badge8');
     }
   };
