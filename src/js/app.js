@@ -114,12 +114,15 @@ wao.randomAnimal = function randomAnimal() {
 //add beaver/otter class to random square, then call function again at an random interval (between 3 and 1 second)
 wao.showAnimals = function showAnimals() {
   setTimeout(() => {
+    //apply temporary class (using method I defined) to random square
     this.selectRandomSquare().addTemporaryClass(this.randomAnimal(), 1000);
+    //set delay to random time
     this.delay = Math.random() * 1000 * (2.5 - 1) + 1;
     //only show animals if game has been started and countdown timer has not run out
     if (this.gameOn === true) {
+      //record time that aminal is shown
       this.timeShowAnimal = $.now();
-      showAnimals();
+      this.showAnimals();
     }
   }, this.delay);
 };
@@ -159,7 +162,7 @@ wao.hideIntro = function hideIntro() {
 };
 //remove the pulse function
 wao.removePulse = function removePulse() {
-  $(this).removeClass('pulse');
+  this.$play.removeClass('pulse');
 };
 //start game function
 wao.startGame = function startGame() {
@@ -183,7 +186,7 @@ wao.startGame = function startGame() {
     }, 1000);
   }
 };
-
+//function which executes when user clicks on beaver/otter/blacnk square
 wao.userClick = function userClick(e) {
   this.userClickAnimal = $.now();
   if (this.gameOn) {
@@ -267,10 +270,10 @@ wao.setup = function() {
   //setup pulse button so that it stops pulsing when clicked
   this.$playButton.on('click', this.removePulse.bind(this));
 
-  //start game when 'start button' is pushed, only if game not started
+  //setup the game so that it can be started when play button is clicked
   this.$play.on('click', this.startGame.bind(this));
 
-  //game logic for user clicking on beavers/otters/empty square
+  //set up the gameholder so that users clicks result in scores
   this.$gameholder.on('click', this.userClick.bind(this));
 };
 $(wao.setup.bind(wao));
