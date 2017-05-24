@@ -45,8 +45,6 @@ wao.userTimeArray = [];
 wao.userFastestCLick = 0;
 wao.userAverageClickTime = 0;
 
-
-
 //function to find click time
 wao.findClickTime = function findClickTime() {
   return ((this.userClickAnimal - this.timeShowAnimal));
@@ -94,6 +92,14 @@ wao.reset = function reset() {
   //reset timer and update timer screen
   clearInterval(this.timerId);
   this.timeRemaining = 20;
+  //rest scoreboard and player information screens to zero
+  this.$clickScoreScreen.html(0);
+  this.$userScoreScreen.html(0);
+  this.$finalScore.html(0);
+  this.$clickTimeDifferenceScreen.html(0);
+  this.$fastestClickScreen.html(0);
+  this.$averageCLickScreen.html(0);
+  this.$avgTimeDifferenceScreen.html(0);
   //clear game board
   this.$squares.removeClass('otter beaver');
   //clear badges from badge area
@@ -182,11 +188,17 @@ wao.startGame = function startGame() {
         this.$timerScreen.addTemporaryClass('ringing', 2000);
         clearInterval(this.timerId);
         this.gameOn = false;
+        //find and show users fastest click time
+        this.$fastestClickScreen.text(this.findUserFastestCLick());
+        //find and show users average click time
+        this.$averageCLickScreen.text(this.findUserAverageClickTime());
+        //find and show final score to user
+        this.$finalScore.text(this.userScore);
       }
     }, 1000);
   }
 };
-//function which executes when user clicks on beaver/otter/blacnk square
+//function which executes when user clicks on beaver/otter/blank square
 wao.userClick = function userClick(e) {
   this.userClickAnimal = $.now();
   if (this.gameOn) {
@@ -220,10 +232,8 @@ wao.userClick = function userClick(e) {
     this.userTimeArray.push(this.findClickTime());
     //show click time to users
     this.$clickTimeDifferenceScreen.text(this.findClickTime());
-    //find and show users fastest click time
-    this.$fastestClickScreen.text(this.findUserFastestCLick());
-    //find and show users average click time
-    this.$averageCLickScreen.text(this.findUserAverageClickTime());
+    //show average click time to user
+    this.$avgTimeDifferenceScreen.text(this.findUserAverageClickTime());
   }
 };
 
@@ -242,11 +252,13 @@ wao.setup = function() {
   //global vaiables for user scores
   this.$clickScoreScreen = $('#clickScoreScreen');
   this.$userScoreScreen = $('#userScoreScreen');
+  this.$finalScore = $('#finalScore');
 
   //global vairables for user click times
   this.$clickTimeDifferenceScreen = $('#timeDifferenceScreen');
   this.$fastestClickScreen = $('#fastestClickScreen');
   this.$averageCLickScreen = $('#averageCLickScreen');
+  this.$avgTimeDifferenceScreen = $('#avgTimeDifferenceScreen');
 
   //global variables for topscores
   this.$highestscoreScreen = $('#highscoreScreen');

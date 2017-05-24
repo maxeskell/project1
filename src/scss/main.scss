@@ -100,7 +100,7 @@ main {
 //container for main playing area and gameinformation
 section {
   width: 500px;
-  height: 590px;
+  height: 610px;
   margin: 5px;
   background-color: #BD4932;
   color: #DB9E36;
@@ -143,6 +143,12 @@ button {
 .info {
   height: 50px;
   clear: both;
+  p {
+    margin-left: 50px;
+  }
+  button {
+    margin-left: 50px;
+  }
 //effect to make timmer shudder when it counts down to zero
   #timerScreen.ringing {
     animation: shake 0.5s infinite;
@@ -158,7 +164,7 @@ button {
 
 .scoreboard {
   width: 100%;
-  height: 50px;
+  height: 100px;
   clear: both;
 }
 
