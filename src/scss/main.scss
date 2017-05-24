@@ -85,10 +85,17 @@ main {
 .hide {
   display: none!important;
 }
-//make reactive for acreens less than 1050px
+//make reactive for screens less than 1050px wide
 @media only screen and (max-width: 1050px) {
   main {
     width: 510px;
+  }
+}
+
+//make reactive for screens less than 800px in height
+@media only screen and (max-height: 800px) {
+  header, footer {
+    display: none;
   }
 }
 
@@ -290,7 +297,7 @@ footer {
   width: 100%;
   background-color: $header-footer-color;
   clear: both;
-  position: absolute;
+  position: fixed;
   bottom: 0;
 
   .generalAssembly {
