@@ -2,8 +2,7 @@
 $font-stack: 'Baloo', cursive;
 $main-color: #FFFAD5;
 $font-color: #FFD34E;
-$header-footer-color: #105B63;
-//mixin created to make sure all images called fit into thier div
+$header-footer-color: #105B63; //mixin created to make sure all images called fit into thier div
 @mixin pop-up-images() {
   background-size: cover;
   position: center;
@@ -58,6 +57,7 @@ main {
   left: 0;
 }
 //introduction (landing) page
+
 .introduction {
   z-index: 2;
   position: absolute;
@@ -75,13 +75,14 @@ main {
 
     p {
       width: 100%;
-      font-size: 40px;
+      font-size: 30px;
       text-align: center;
       margin: 10px;
     }
   }
 }
 //global asignment so that anything with the class hide is forced to be hidden
+
 .hide {
   display: none!important;
 }
@@ -91,10 +92,10 @@ main {
     width: 510px;
   }
 }
-
 //make reactive for screens less than 800px in height
 @media only screen and (max-height: 800px) {
-  header, footer {
+  footer,
+  header {
     display: none;
   }
 }
@@ -105,6 +106,7 @@ main {
   clear: both;
 }
 //container for main playing area and gameinformation
+
 section {
   width: 500px;
   height: 610px;
@@ -113,7 +115,6 @@ section {
   color: #DB9E36;
   float: left;
 }
-
 //start button
 button {
   margin: 5px 10px 5px 20px;
@@ -126,37 +127,72 @@ button {
   border-radius: 6px;
 }
 //pulse effect for the play button, so that it draws the eye after the user moves from the intro screen
+
 .pulse {
   -webkit-animation-name: pulsate;
   -webkit-animation-duration: 1s;
   -webkit-animation-timing-function: ease-in-out;
-  -webkit-animation-iteration-count: infinite
+  -webkit-animation-iteration-count: infinite;
 }
-
 @-webkit-keyframes pulsate {
-0% { opacity: 0.0}
- 10% { opacity: .20}
- 20% { opacity: .40 }
- 30% { opacity: .60 }
- 40% { opacity: .80 }
- 50% { opacity: 1.0}
- 60% { opacity: .80}
- 70% { opacity: .60}
- 80% { opacity: .40}
- 90% { opacity: .20}
- 100% { opacity: 0.0}
+  0% {
+    opacity: 0.0;
+  }
+
+  10% {
+    opacity: 0.20;
+  }
+
+  20% {
+    opacity: 0.40;
+  }
+
+  30% {
+    opacity: 0.60;
+  }
+
+  40% {
+    opacity: 0.80;
+  }
+
+  50% {
+    opacity: 1.0;
+  }
+
+  60% {
+    opacity: 0.80;
+  }
+
+  70% {
+    opacity: 0.60;
+  }
+
+  80% {
+    opacity: 0.40;
+  }
+
+  90% {
+    opacity: 0.20;
+  }
+
+  100% {
+    opacity: 0.0;
+  }
 }
 
 .info {
   height: 50px;
   clear: both;
+
   p {
     margin-left: 50px;
   }
+
   button {
     margin-left: 50px;
   }
-//effect to make timmer shudder when it counts down to zero
+  //effect to make timmer shudder when it counts down to zero
+
   #timerScreen.ringing {
     animation: shake 0.5s infinite;
   }
@@ -209,7 +245,6 @@ p {
   line-height: 1.0;
   margin: 5px 5px 5px 10px;
 }
-
 // game area squares
 div {
   .square {
