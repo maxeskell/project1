@@ -92,8 +92,8 @@ main {
     width: 510px;
   }
 }
-//make reactive for screens less than 800px in height
-@media only screen and (max-height: 800px) {
+//make reactive for screens less than 700px in height
+@media only screen and (max-height: 700px) {
   footer,
   header {
     display: none;
@@ -110,7 +110,7 @@ main {
 section {
   width: 500px;
   height: 610px;
-  margin: 5px;
+  margin: -5px 5px 0 0;
   background-color: #BD4932;
   color: #DB9E36;
   float: left;
