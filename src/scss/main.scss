@@ -1,8 +1,9 @@
 //global color can be changed here
-$font-stack: 'Baloo', cursive;
+$font-stack: 'Baloo', 'ChalkboardSE-Regular', 'ArialMT';
 $main-color: #FFFAD5;
 $font-color: #FFD34E;
-$header-footer-color: #105B63; //mixin created to make sure all images called fit into thier div
+$header-footer-color: #105B63;
+//mixin created to make sure all images called fit into thier div
 @mixin pop-up-images() {
   background-size: cover;
   position: center;
@@ -17,11 +18,12 @@ body {
 }
 
 header {
-  height: 75px;
+  height: 60px;
   width: 100%;
   background-color: $header-footer-color;
   color: $font-color;
   text-align: center;
+  line-height: 60px;
 }
 
 h1 {
@@ -46,11 +48,12 @@ h3 {
 }
 
 main {
-  width: 1020px;
-  height: 600px;
+  max-width: 1020px;
+  width: 100%;
+  max-height: 600px;
+  height: 100%;
   margin: auto;
   position: absolute;
-  margin: auto;
   top: 0;
   right: 0;
   bottom: 0;
@@ -87,9 +90,12 @@ main {
   display: none!important;
 }
 //make reactive for screens less than 1050px wide
-@media only screen and (max-width: 1050px) {
+@media only screen and (max-width: 1020px) {
   main {
-    width: 510px;
+    max-width: 700px;
+  }
+  section {
+    float: none;
   }
 }
 //make reactive for screens less than 700px in height
@@ -97,6 +103,9 @@ main {
   footer,
   header {
     display: none;
+  }
+  section {
+    float: none;
   }
 }
 
@@ -108,9 +117,10 @@ main {
 //container for main playing area and gameinformation
 
 section {
-  width: 500px;
+  max-width: 500px;
+  width: 100%;
   height: 610px;
-  margin: -5px 5px 0 0;
+  margin: 0 5px 10px;
   background-color: #BD4932;
   color: #DB9E36;
   float: left;
@@ -201,7 +211,8 @@ button {
 .gameholder {
   width: 350px;
   height: 350px;
-  margin: 0 auto;
+  margin: 0 auto 10px;
+  padding: 5px;
   clear: both;
 }
 
@@ -328,7 +339,7 @@ div {
 }
 
 footer {
-  height: 75px;
+  height: 60px;
   width: 100%;
   background-color: $header-footer-color;
   clear: both;
