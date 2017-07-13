@@ -1,6 +1,9 @@
 {
   "name": "gulp-sass-lesson",
   "version": "1.0.0",
+  "engines": {
+    "node:" "7.1.0"
+  },
   "description": "",
   "main": "gulpfile.js",
   "devDependencies": {

@@ -212,7 +212,7 @@ wao.userClick = function userClick(e) {
       //hide animal by removing class
       ($(e.target).removeClass('beaver'));
       //make sound (not included yet)
-      this.$clickOnCorrect.play();
+      $('/public/assets/sounds/success.mp3')[0].play();
     } else if ($(e.target).hasClass('otter')) {
       this.clickScore = -10;
       this.userScore -= 20;
@@ -220,13 +220,13 @@ wao.userClick = function userClick(e) {
       this.checkAndShowBadges();
       ($(e.target).removeClass('otter'));
       //make sound (not included yet)
-      this.$clickOnWrong.play();
+      $('/public/assets/sounds/notsuccess.mp3')[0].play();
     } else {
       this.clickScore = -5;
       this.userScore -= 5;
       this.blankScore += 1;
       //make sound (not included yet)
-      this.$clickOnBlank.play();
+      $('/public/assets/sounds/blank.wav')[0].play();
     }
     //show users current score, running total and click time
     this.$clickScoreScreen.text(this.clickScore);
@@ -280,9 +280,9 @@ wao.setup = function() {
   this.$badge8 = $('#badge8');
 
   //audio
-  this.$clickOnCorrect = $('#clickOnCorrect');
-  this.$clickOnWrong = $('#clickOnWrong');
-  this.$clickOnBlank = $('#clickOnBlank');
+  this.$clickOnCorrect = $('#clickOnCorrect')[0];
+  this.$clickOnWrong = $('#clickOnWrong')[0];
+  this.$clickOnBlank = $('#clickOnBlank')[0];
 
   //setup introduction screen so that it will hide when ready button is clicked
   this.$ready.on('click', this.hideIntro.bind(this));
